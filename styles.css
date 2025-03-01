@@ -69,3 +69,17 @@ li {
 .delete-btn:hover {
     background: #c82333;
 }
+
+#clearAll {
+    background: #ff5733;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#clearAll:hover {
+    background: #c70039;
+}

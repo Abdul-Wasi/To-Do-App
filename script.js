@@ -10,7 +10,10 @@ function addTask() {
     }
 
     let li = document.createElement("li");
-    li.innerHTML = `${taskInput.value} <button class="delete-btn" onclick="deleteTask(this)">X</button>`;
+    li.innerHTML = `
+        <span onclick="editTask(this)">${taskInput.value}</span>
+        <button class="delete-btn" onclick="deleteTask(this)">X</button>
+    `;
     
     taskList.appendChild(li);
     saveTasks();
@@ -22,10 +25,23 @@ function deleteTask(button) {
     saveTasks();
 }
 
+function editTask(taskElement) {
+    let newText = prompt("Edit task:", taskElement.innerText);
+    if (newText) {
+        taskElement.innerText = newText;
+        saveTasks();
+    }
+}
+
+function clearAllTasks() {
+    document.getElementById("taskList").innerHTML = "";
+    localStorage.removeItem("tasks");
+}
+
 function saveTasks() {
     let tasks = [];
-    document.querySelectorAll("#taskList li").forEach((li) => {
-        tasks.push(li.textContent.replace("X", "").trim());
+    document.querySelectorAll("#taskList li span").forEach((span) => {
+        tasks.push(span.innerText);
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
@@ -36,7 +52,10 @@ function loadTasks() {
 
     storedTasks.forEach((task) => {
         let li = document.createElement("li");
-        li.innerHTML = `${task} <button class="delete-btn" onclick="deleteTask(this)">X</button>`;
+        li.innerHTML = `
+            <span onclick="editTask(this)">${task}</span>
+            <button class="delete-btn" onclick="deleteTask(this)">X</button>
+        `;
         taskList.appendChild(li);
     });
 }
