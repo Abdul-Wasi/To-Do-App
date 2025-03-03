@@ -98,3 +98,31 @@ body.dark-mode {
   background: yellow;
   color: black;
 }
+
+#progressContainer {
+  width: 100%;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+#progressBar {
+  height: 10px;
+  width: 0%;
+  background: limegreen;
+  transition: width 0.3s ease-in-out;
+}
+
+.dark-mode #progressContainer {
+  background: #444;
+}
+
+.dark-mode #progressBar {
+  background: lightgreen;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
