@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function addTask() {
   let taskInput = document.getElementById("taskInput");
+  let taskDate = document.getElementById("taskDate");
   let taskList = document.getElementById("taskList");
 
   if (taskInput.value.trim() === "") {
@@ -13,15 +14,17 @@ function addTask() {
   }
 
   let li = document.createElement("li");
-  li.innerHTML = `
-      <span onclick="toggleTaskCompletion(this)">${taskInput.value}</span>
-      <button class="delete-btn" onclick="deleteTask(this)">X</button>
-  `;
+    let dueDate = taskDate.value ? ` (Due: ${taskDate.value})` : "";
+    li.innerHTML = `
+        <span onclick="toggleTaskCompletion(this)">${taskInput.value} ${dueDate}</span>
+        <button class="delete-btn" onclick="deleteTask(this)">X</button>
+    `;
 
-  taskList.appendChild(li);
-  saveTasks();
-  taskInput.value = "";
-  updateProgress();
+    taskList.appendChild(li);
+    saveTasks();
+    taskInput.value = "";
+    taskDate.value = ""; // Reset date input
+    updateProgress();
 }
 
 function deleteTask(button) {
@@ -44,9 +47,9 @@ function clearAllTasks() {
 
 function saveTasks() {
   let tasks = [];
-  document.querySelectorAll("#taskList li").forEach((li) => {
-      let text = li.querySelector("span").innerText;
-      let completed = li.classList.contains("completed");
+  document.querySelectorAll("#taskList li span").forEach((span) => {
+      let text = span.innerText;
+      let completed = span.parentElement.classList.contains("completed");
       tasks.push({ text, completed });
   });
   localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -64,7 +67,7 @@ function loadTasks() {
           <button class="delete-btn" onclick="deleteTask(this)">X</button>
       `;
       
-      if (completed) li.classList.add("completed"); // Ensure completed tasks are marked
+      if (completed) li.classList.add("completed");
       taskList.appendChild(li);
   });
 
