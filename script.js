@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function addTask() {
   let taskInput = document.getElementById("taskInput");
   let taskCategory = document.getElementById("taskCategory").value;
+  let taskPriority = document.getElementById("taskPriority").value;
   let taskDate = document.getElementById("taskDate");
   let taskList = document.getElementById("taskList");
 
@@ -17,12 +18,15 @@ function addTask() {
   let li = document.createElement("li");
   let dueDate = taskDate.value ? ` (Due: ${taskDate.value})` : "";
   li.classList.add(taskCategory.toLowerCase()); // Assign category class
+  li.classList.add(taskPriority.toLowerCase()); // Assign priority class
+  li.setAttribute("data-priority", taskPriority);
   li.innerHTML = `
         <span onclick="toggleTaskCompletion(this)">${taskInput.value} ${dueDate}</span>
         <button class="delete-btn" onclick="deleteTask(this)">X</button>
     `;
 
   taskList.appendChild(li);
+  sortTasksByPriority();
   saveTasks();
   taskInput.value = "";
   taskDate.value = ""; // Reset date input
@@ -104,12 +108,27 @@ function applyTheme() {
   }
 }
 
-function searchTasks(){
+function searchTasks() {
   let query = document.getElementById("searchInput").value.toLowerCase();
   let tasks = document.querySelectorAll("#taskList li");
 
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     let text = task.innerText.toLowerCase();
     task.style.display = text.includes(query) ? "flex" : "none";
   });
+}
+
+function sortTasksByPriority() {
+  let taskList = document.getElementById("taskList");
+  let tasks = Array.from(taskList.children);
+
+  tasks.sort((a, b) => {
+    let priorityOrder = { High: 1, Medium: 2, Low: 3 };
+    return (
+      priorityOrder[a.getAttribute("data-priority")] -
+      priorityOrder[b.getAttribute("data-priority")]
+    );
+  });
+
+  tasks.forEach((task) => taskList.appendChild(task)); // Reorder list
 }

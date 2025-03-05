@@ -127,3 +127,13 @@ input[type="date"] {
 .urgent {
   color: red;
 }
+.low {
+  color: grey;
+}
+.medium {
+  color: orange;
+}
+.high {
+  color: red;
+  font-weight: bold;
+}
