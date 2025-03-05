@@ -118,3 +118,12 @@ input[type="date"] {
   color: white;
   border: 1px solid white;
 }
+.personal {
+  color: blue;
+}
+.work {
+  color: green;
+}
+.urgent {
+  color: red;
+}
