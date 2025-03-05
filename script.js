@@ -17,18 +17,18 @@ function addTask() {
 
   let li = document.createElement("li");
   let dueDate = taskDate.value ? ` (Due: ${taskDate.value})` : "";
-  li.classList.add(taskCategory.toLowerCase()); // Assign category class
   li.classList.add(taskPriority.toLowerCase()); // Assign priority class
   li.setAttribute("data-priority", taskPriority);
   li.innerHTML = `
         <span onclick="toggleTaskCompletion(this)">${taskInput.value} ${dueDate}</span>
+        <span class = "category">(${taskCategory})</span>
         <button class="delete-btn" onclick="deleteTask(this)">X</button>
     `;
 
   taskList.appendChild(li);
   sortTasksByPriority();
   saveTasks();
-  taskInput.value = "";
+  taskInput.value = ""; // Reset task value/text
   taskDate.value = ""; // Reset date input
   updateProgress();
 }
