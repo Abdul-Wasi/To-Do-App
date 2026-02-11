@@ -1,6 +1,6 @@
 # To-Do List Application
 
-This is a simple yet functional To-Do List web application that helps you organize your tasks. It includes features like adding tasks with categories, priorities, and due dates, marking tasks as complete, deleting tasks, searching, and a dark mode toggle.
+This is a simple yet functional To-Do List web application that helps you organize your tasks. It includes features like adding tasks with categories, priorities, and due dates, marking tasks as complete, deleting tasks, searching, and a dark mode toggle. 😊
 
 ---
 
