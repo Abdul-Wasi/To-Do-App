@@ -28,8 +28,8 @@ function addTask() {
   taskList.appendChild(li);
   sortTasksByPriority();
   saveTasks();
-  taskInput.value = ""; // Reset task value/text
-  taskDate.value = ""; // Reset date input
+  taskInput.value = ""; // Reset task value/text.
+  taskDate.value = ""; // Reset date input.
   updateProgress();
 }
 
